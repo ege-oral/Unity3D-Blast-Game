@@ -13,18 +13,28 @@ public class Tile : MonoBehaviour
         tileRigidBody = GetComponent<Rigidbody>();
     }
 
+    private void FixedUpdate() 
+    {
+        if(preventBounce)
+        {
+            tileRigidBody.velocity = Vector3.zero;
+        }
+    }
     void Update()
     {
         
     }
 
-    private void FixedUpdate() 
+    private void OnCollisionEnter(Collision other) 
     {
-        if(tileRigidBody.velocity.y > 0f && !preventBounce)
-        {
+
+        if(other.gameObject.tag == "Tile" && other.gameObject.tag == "Floor")
             preventBounce = true;
-            tileRigidBody.AddForce(new Vector3(0f, -2f, 0f), ForceMode.Impulse);
-        }
+    }
+
+    private void OnMouseDown() 
+    {
+        print(gameObject.name);    
     }
 
 }
