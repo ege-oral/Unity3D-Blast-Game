@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    [SerializeField] public string tileColor;
+    public bool isVisited = false;
+
+
+
     Rigidbody tileRigidBody;
-    
     private bool preventBounce = false;
+    private bool blast = false;
     
     void Start()
     {
@@ -22,7 +27,8 @@ public class Tile : MonoBehaviour
     }
     void Update()
     {
-        
+        if(blast)
+            Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision other) 
@@ -34,7 +40,8 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown() 
     {
-        print(gameObject.name);    
+        // print(gameObject.name);
+        // blast = true;
     }
 
 }

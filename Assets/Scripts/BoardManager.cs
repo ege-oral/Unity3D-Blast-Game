@@ -5,21 +5,32 @@ using Cinemachine;
 
 public class BoardManager : MonoBehaviour
 {    
-    [SerializeField] CinemachineVirtualCamera lookCamera;
 
+    [Header("Game Rules")]
     [SerializeField][Range(2, 10)] private int numberOfRows;
     [SerializeField][Range(2, 10)] private int numberOfCollums;
     [SerializeField][Range(1, 6)] private int numberOfColors; 
+    [SerializeField] private int A;
+    [SerializeField] private int B;
+    [SerializeField] private int C;
 
     [SerializeField] GameObject[] tiles;
+    [SerializeField] GameObject allTileInstances;
+    [SerializeField] CinemachineVirtualCamera lookCamera;
+    TileMatrix tileMatrix;
 
-    void Start()
+    private void Awake() 
     {
+        tileMatrix = FindObjectOfType<TileMatrix>();
         BoardStartSize();
         FillTheBoard();
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         
@@ -62,7 +73,12 @@ public class BoardManager : MonoBehaviour
         {
             for(int collum = 0; collum < numberOfCollums; collum++)
             {
-                Instantiate(tiles[Random.Range(0,numberOfColors)], new Vector3(collum, row, 0f), Quaternion.identity);
+                GameObject tile = Instantiate(tiles[Random.Range(0,numberOfColors)], 
+                                              new Vector3(collum, row, 0f), 
+                                              Quaternion.identity);
+                tileMatrix.grid[row, collum] = tile;
+                tile.transform.parent = allTileInstances.transform;
+                
             }
         }
     }

@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: tileColor
+      value: purple
+      objectReference: {fileID: 0}
     - target: {fileID: 3674610410521420019, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: m_Name
-      value: Tile
+      value: Purple Tile Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3674610410521420020, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: m_RootOrder
