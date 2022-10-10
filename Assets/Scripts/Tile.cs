@@ -7,6 +7,9 @@ public class Tile : MonoBehaviour
     [SerializeField] public string tileColor;
     public bool isVisited = false;
 
+    public GameObject nextConnectedTile;
+    public GameObject previousConnectedTile;
+
 
 
     Rigidbody tileRigidBody;
@@ -28,7 +31,25 @@ public class Tile : MonoBehaviour
     void Update()
     {
         if(blast)
-            Destroy(this.gameObject);
+        {
+            GameObject tmp = nextConnectedTile;
+            while(tmp != null)
+            {
+                tmp = tmp.GetComponent<Tile>().nextConnectedTile;
+                Destroy(tmp);
+            }
+            GameObject tmp2 = previousConnectedTile;
+            while(tmp2 != null)
+            {
+                tmp2 = tmp2.GetComponent<Tile>().previousConnectedTile;
+                Destroy(tmp2);
+            }
+            Destroy(nextConnectedTile);
+            Destroy(previousConnectedTile);
+            Destroy(gameObject);
+   
+
+        }
     }
 
     private void OnCollisionEnter(Collision other) 
@@ -40,8 +61,8 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown() 
     {
-        // print(gameObject.name);
-        // blast = true;
+        print(gameObject.name);
+        blast = true;
     }
 
 }

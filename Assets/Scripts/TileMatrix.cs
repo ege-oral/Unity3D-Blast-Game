@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TileMatrix : MonoBehaviour
 {
-    //public Dictionary<Vector2, GameObject> grid = new Dictionary<Vector2, GameObject>();
-    public GameObject[,] grid = new GameObject[5,5];
+    // TO DO change 5,5.
+    int row;
+    int collum;
+    public GameObject[,] grid = new GameObject[10,10];
 
-    void Start()
+    void Awake()
     {
         for(int row = 0; row < grid.GetLength(0); row++)
         {
@@ -15,29 +17,22 @@ public class TileMatrix : MonoBehaviour
             {
                 List<GameObject> connectedList = new List<GameObject>();
                 GameObject currentTile = grid[row, col];
-                string tileColor = currentTile.GetComponent<Tile>().tileColor;
-                Explore(grid, row, col, tileColor, connectedList);
-                foreach(GameObject g in connectedList)
-                    print(g);
-                print("test");
+                if(!currentTile.GetComponent<Tile>().isVisited)
+                {
+                    string tileColor = currentTile.GetComponent<Tile>().tileColor;
+                    Explore(grid, row, col, tileColor, connectedList);
 
+                    for(int i = 0; i < connectedList.Count - 1; i++)
+                    {
+                        connectedList[i].gameObject.GetComponent<Tile>().nextConnectedTile = connectedList[i + 1];
+                        connectedList[i + 1].GetComponent<Tile>().previousConnectedTile = connectedList[i];
+                    }
+
+                }
             }
         }
     }
 
-    void Update()
-    {
-        
-    }
-
-    private void FindSameTiles()
-    {
-        // foreach(KeyValuePair<Vector2, GameObject> kvp in grid)
-        // {
-        //     print(kvp.Key.x);
-        //     Explore(kvp);
-        // }
-    }
 
     private void Explore(GameObject[,] grid, int row, int col, 
                          string tileColor, List<GameObject> connectedList)
@@ -53,7 +48,5 @@ public class TileMatrix : MonoBehaviour
         Explore(grid, row - 1, col, tileColor, connectedList);
         Explore(grid, row, col + 1, tileColor, connectedList);
         Explore(grid, row, col - 1, tileColor, connectedList);
-
-        
     }
 }
