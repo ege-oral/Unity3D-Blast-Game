@@ -14,27 +14,36 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private int B;
     [SerializeField] private int C;
 
+    GameObject [,] grid;
     [SerializeField] GameObject[] tiles;
     [SerializeField] GameObject allTileInstances;
     [SerializeField] CinemachineVirtualCamera lookCamera;
-    TileMatrix tileMatrix;
+
+    List<int> arr = new List<int>();
+    public bool isPlayerClicked = false;
 
     private void Awake() 
     {
-        tileMatrix = FindObjectOfType<TileMatrix>();
+        grid = new GameObject[numberOfRows, numberOfCollums];
+
         BoardStartSize();
-        FillTheBoard();
+        FillTheBoardOnLoad();
+        FindSameTiles();
     }
 
-    void Start()
-    {
-        
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.R))
+            StartCoroutine(CheckGrid());
+
+        if(isPlayerClicked)
+        {
+            CheckIfGridChanged();
+            StartCoroutine(FillMissingPlaces());
+            
+            isPlayerClicked = false;
+        }
     }
 
-    void Update()
-    {
-        
-    }
 
     private void BoardStartSize()
     {
@@ -67,7 +76,7 @@ public class BoardManager : MonoBehaviour
         transform.localScale = new Vector3(numberOfCollums, numberOfRows, 1f);  
     }
 
-    private void FillTheBoard()
+    private void FillTheBoardOnLoad()
     {   
         for(int row = 0; row < numberOfRows; row++)
         {
@@ -76,10 +85,134 @@ public class BoardManager : MonoBehaviour
                 GameObject tile = Instantiate(tiles[Random.Range(0,numberOfColors)], 
                                               new Vector3(collum, row, 0f), 
                                               Quaternion.identity);
-                tileMatrix.grid[row, collum] = tile;
+                grid[row, collum] = tile;
                 tile.transform.parent = allTileInstances.transform;
-                
             }
         }
+    }
+
+    private void FindSameTiles()
+    {
+        for(int row = 0; row < grid.GetLength(0); row++)
+        {
+            for(int col = 0; col < grid.GetLength(1); col++)
+            {
+                List<GameObject> connectedList = new List<GameObject>();
+                GameObject currentTile = grid[row, col];
+                if(!currentTile.GetComponent<Tile>().isVisited)
+                {
+                    string tileColor = currentTile.GetComponent<Tile>().tileColor;
+                    ExploreGrid(grid, row, col, tileColor, connectedList);
+
+                    for(int i = 0; i < connectedList.Count - 1; i++)
+                    {
+                        connectedList[i].gameObject.GetComponent<Tile>().nextConnectedTile = connectedList[i + 1];
+                        connectedList[i + 1].GetComponent<Tile>().previousConnectedTile = connectedList[i];
+                    }
+                }
+            }
+        }
+    }
+
+    private void ExploreGrid(GameObject[,] grid, int row, int col, 
+                         string tileColor, List<GameObject> connectedList)
+    {
+        if(!(row >= 0) || !(row < grid.GetLength(0))) { return; }
+        if(!(col >= 0) || !(col < grid.GetLength(1))) { return; }
+        if(grid[row,col].GetComponent<Tile>().tileColor != tileColor) { return; }
+        if(grid[row,col].GetComponent<Tile>().isVisited) {return; }
+        grid[row,col].GetComponent<Tile>().isVisited = true;
+        connectedList.Add(grid[row,col]);
+
+        ExploreGrid(grid, row + 1, col, tileColor, connectedList);
+        ExploreGrid(grid, row - 1, col, tileColor, connectedList);
+        ExploreGrid(grid, row, col + 1, tileColor, connectedList);
+        ExploreGrid(grid, row, col - 1, tileColor, connectedList);
+    }
+
+    IEnumerator CheckGrid()
+    {
+        for (int i = 0; i < grid.GetLength(0); i++)
+        {
+            for(int j = 0; j < grid.GetLength(1); j++)
+            {
+                if(grid[i, j] == null)
+                {
+                    Instantiate(tiles[Random.Range(0,numberOfColors)],
+                                new Vector3(j, 10f, 0f),
+                                Quaternion.identity);
+                    yield return new WaitForSeconds(.1f);
+                }
+            }
+        }
+    }
+
+    private void CheckIfGridChanged()
+    {
+        for (int i = 0; i < grid.GetLength(0); i++)
+        {
+            for(int j = 0; j < grid.GetLength(1); j++)
+            {
+                if(grid[i, j] == null)
+                {
+                    arr.Add(j);
+                }
+            }
+        }
+    }
+
+    IEnumerator FillMissingPlaces()
+    {
+        foreach(int missingCollum in arr)
+        {
+            GameObject newTile = Instantiate(tiles[Random.Range(0,numberOfColors)],
+                                             new Vector3(missingCollum, 10f, 0f),
+                                             Quaternion.identity);
+            newTile.transform.parent = allTileInstances.transform;
+            yield return new WaitForSeconds(.1f);
+        }
+        arr.Clear();
+        yield return new WaitForSeconds(4f);
+        CreateNewMatrix();
+
+    }
+
+    // IEnumerator CreateNewMatrix()
+    // {
+    //     yield return new WaitForSeconds(3f);
+    //     print("yes");
+    //     GameObject[,] newGrid = new GameObject[numberOfRows, numberOfCollums];
+    //     foreach(Transform tile in allTileInstances.transform)
+    //     {   
+    //         int tileXPos = Mathf.RoundToInt(tile.gameObject.transform.position.x);
+    //         int tileYPos = Mathf.RoundToInt(tile.gameObject.transform.position.y);
+
+    //         newGrid[tileYPos, tileXPos] = tile.gameObject;
+    //     }
+    //     grid = newGrid;
+    //     for(int i = 0; i < grid.GetLength(0); i++)
+    //         for(int j = 0; j < grid.GetLength(1); j++)
+    //             print(grid[i,j]);
+
+    //     FindSameTiles();
+    //     print("now");
+    // }
+    
+    private void CreateNewMatrix()
+    {
+        print("yes");
+        GameObject[,] newGrid = new GameObject[numberOfRows, numberOfCollums];
+        foreach(Transform tile in allTileInstances.transform)
+        {   
+            int tileXPos = Mathf.RoundToInt(tile.gameObject.transform.position.x);
+            int tileYPos = Mathf.RoundToInt(tile.gameObject.transform.position.y);
+            tile.gameObject.GetComponent<Tile>().nextConnectedTile = null;
+            tile.gameObject.GetComponent<Tile>().previousConnectedTile = null;
+            tile.gameObject.GetComponent<Tile>().isVisited = false;
+            newGrid[tileYPos, tileXPos] = tile.gameObject;
+        }
+        grid = newGrid;
+        FindSameTiles();
+        print("now");
     }
 }

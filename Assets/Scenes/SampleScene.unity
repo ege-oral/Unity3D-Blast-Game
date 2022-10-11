@@ -299,8 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28e6a3200fa1fb45b76c5ada4b485f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRows: 5
-  numberOfCollums: 5
+  numberOfRows: 8
+  numberOfCollums: 8
   numberOfColors: 4
   A: 0
   B: 0
@@ -314,6 +314,7 @@ MonoBehaviour:
   - {fileID: 7745100287191198071, guid: e3b479cf7384c0c43b83d719b2227997, type: 3}
   allTileInstances: {fileID: 1000959014}
   lookCamera: {fileID: 361420366}
+  isPlayerClicked: 0
 --- !u!4 &95873561
 Transform:
   m_ObjectHideFlags: 0
@@ -757,48 +758,4 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1012761000
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1012761002}
-  - component: {fileID: 1012761001}
-  m_Layer: 0
-  m_Name: Tile Matrix
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1012761001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012761000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 050f9b465d8e3ad4e9cca6fb35937fbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1012761002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012761000}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.004999876, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
