@@ -14,10 +14,10 @@ public class Tile : MonoBehaviour
     Rigidbody tileRigidBody;
     private bool preventBounce = false;
 
-    [SerializeField] Material materialDefault;
-    [SerializeField] Material materialA;
-    [SerializeField] Material materialB;
-    [SerializeField] Material materialC;
+    [SerializeField] public Material materialDefault;
+    [SerializeField] public Material materialA;
+    [SerializeField] public Material materialB;
+    [SerializeField] public Material materialC;
     
 
     BoardManager boardManager;
@@ -70,7 +70,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown() 
     {
-        if(boardManager.canClickAgain)
+        if((nextConnectedTile != null || previousConnectedTile != null) && boardManager.canClickAgain)
             blast = true;
     }
 

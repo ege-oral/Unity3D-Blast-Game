@@ -8,9 +8,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialA
+      value: 
+      objectReference: {fileID: 2100000, guid: 2828ab57742c57d479d745c986bf7ef7, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialB
+      value: 
+      objectReference: {fileID: 2100000, guid: a5840e3685a36d146abdf108eccaabf6, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialC
+      value: 
+      objectReference: {fileID: 2100000, guid: 49ab2bb489fec5945831b94669492618, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: tileColor
       value: yellow
       objectReference: {fileID: 0}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialDefault
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d2d97103b89f0b41ba6fb3c6e2c7b8c, type: 2}
     - target: {fileID: 3674610410521420019, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: m_Name
       value: Yellow Tile Variant
@@ -62,6 +78,6 @@ PrefabInstance:
     - target: {fileID: 3674610410521420022, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: af016068f9f3f9540880ebb878b6d870, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d2d97103b89f0b41ba6fb3c6e2c7b8c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}

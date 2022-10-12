@@ -8,9 +8,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialA
+      value: 
+      objectReference: {fileID: 2100000, guid: d453517c4ed16c147be402fc9379517c, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialB
+      value: 
+      objectReference: {fileID: 2100000, guid: a4235d1ee4610364c9870278ea995922, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialC
+      value: 
+      objectReference: {fileID: 2100000, guid: 35672437043eaed43ba3f71eae32d9bb, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: tileColor
       value: purple
       objectReference: {fileID: 0}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialDefault
+      value: 
+      objectReference: {fileID: 2100000, guid: 8af21ed5a8ef6004587dc9c2c20268ae, type: 2}
     - target: {fileID: 3674610410521420019, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: m_Name
       value: Purple Tile Variant
@@ -62,6 +78,6 @@ PrefabInstance:
     - target: {fileID: 3674610410521420022, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b60af1625f058814180c6f01005aef11, type: 2}
+      objectReference: {fileID: 2100000, guid: 8af21ed5a8ef6004587dc9c2c20268ae, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}

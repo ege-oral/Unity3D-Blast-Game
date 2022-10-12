@@ -299,12 +299,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28e6a3200fa1fb45b76c5ada4b485f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRows: 2
-  numberOfCollums: 4
-  numberOfColors: 3
-  A: 0
-  B: 0
-  C: 0
+  numberOfRows: 4
+  numberOfCollums: 10
+  numberOfColors: 4
+  A: 4
+  B: 7
+  C: 9
   tiles:
   - {fileID: 608434824334458820, guid: cce5046974f5ae74ca1c69f4677e4763, type: 3}
   - {fileID: 7559568704663865014, guid: d27ea47b7818e744284d585a789ce23b, type: 3}

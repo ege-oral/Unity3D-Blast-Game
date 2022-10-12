@@ -8,9 +8,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialA
+      value: 
+      objectReference: {fileID: 2100000, guid: e8122a07e02a8164590dd029dd117fb0, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialB
+      value: 
+      objectReference: {fileID: 2100000, guid: c72197f58ff68304996f1c82fb8a0215, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialC
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d5028cfbbd3b6f45b8d7e74c74d37bb, type: 2}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: tileColor
       value: pink
       objectReference: {fileID: 0}
+    - target: {fileID: 1259791261907798684, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: materialDefault
+      value: 
+      objectReference: {fileID: 2100000, guid: f8e30faa7d7d50a4282a1e671aea8fa7, type: 2}
     - target: {fileID: 3674610410521420019, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: m_Name
       value: Pink Tile Variant
@@ -62,6 +78,6 @@ PrefabInstance:
     - target: {fileID: 3674610410521420022, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 20185ae0a9e61b042a6c0e7d0371a67b, type: 2}
+      objectReference: {fileID: 2100000, guid: f8e30faa7d7d50a4282a1e671aea8fa7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}

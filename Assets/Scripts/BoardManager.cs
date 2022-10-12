@@ -10,9 +10,9 @@ public class BoardManager : MonoBehaviour
     [SerializeField][Range(2, 10)] private int numberOfRows;
     [SerializeField][Range(2, 10)] private int numberOfCollums;
     [SerializeField][Range(1, 6)] private int numberOfColors; 
-    [SerializeField] private int A;
-    [SerializeField] private int B;
-    [SerializeField] private int C;
+    [SerializeField] private int A = 4;
+    [SerializeField] private int B = 7;
+    [SerializeField] private int C = 9;
 
     GameObject [,] grid;
     [SerializeField] GameObject[] tiles;
@@ -40,7 +40,7 @@ public class BoardManager : MonoBehaviour
             CheckIfGridChanged();
             StartCoroutine(FillMissingPlaces());
             
-            isPlayerClicked = false;
+            
         }
     }
 
@@ -108,9 +108,30 @@ public class BoardManager : MonoBehaviour
                     {
                         connectedList[i].gameObject.GetComponent<Tile>().nextConnectedTile = connectedList[i + 1];
                         connectedList[i + 1].GetComponent<Tile>().previousConnectedTile = connectedList[i];
+
+                        int numberOfTileInConnectedList = connectedList.Count;
+                        if(numberOfTileInConnectedList <= A)
+                        {
+                            connectedList[i].gameObject.GetComponent<MeshRenderer>().material = connectedList[i].gameObject.GetComponent<Tile>().materialDefault;
+                            connectedList[i + 1].gameObject.GetComponent<MeshRenderer>().material = connectedList[i].gameObject.GetComponent<Tile>().materialDefault;
+                        }
+                        else if(numberOfTileInConnectedList > A && numberOfTileInConnectedList <= B)
+                        {
+                            connectedList[i].gameObject.GetComponent<MeshRenderer>().material = connectedList[i].gameObject.GetComponent<Tile>().materialA;
+                            connectedList[i + 1].gameObject.GetComponent<MeshRenderer>().material = connectedList[i].gameObject.GetComponent<Tile>().materialA;
+                        }
+                        else if(numberOfTileInConnectedList > B && numberOfTileInConnectedList <= C)
+                        {
+                            connectedList[i].gameObject.GetComponent<MeshRenderer>().material = connectedList[i].gameObject.GetComponent<Tile>().materialB;
+                            connectedList[i + 1].gameObject.GetComponent<MeshRenderer>().material = connectedList[i].gameObject.GetComponent<Tile>().materialB;
+                        }
+                        else
+                        {
+                            connectedList[i].gameObject.GetComponent<MeshRenderer>().material = connectedList[i].gameObject.GetComponent<Tile>().materialC;
+                            connectedList[i + 1].gameObject.GetComponent<MeshRenderer>().material = connectedList[i].gameObject.GetComponent<Tile>().materialC;
+                        }
                     }
                 }
-                print(connectedList.Count);
             }
         }
     }
@@ -159,7 +180,7 @@ public class BoardManager : MonoBehaviour
         }
         arr.Clear();
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         CreateNewMatrix();
     }
 
@@ -175,11 +196,14 @@ public class BoardManager : MonoBehaviour
             tile.gameObject.GetComponent<Tile>().nextConnectedTile = null;
             tile.gameObject.GetComponent<Tile>().previousConnectedTile = null;
             tile.gameObject.GetComponent<Tile>().isVisited = false;
+            tile.gameObject.GetComponent<MeshRenderer>().material = tile.gameObject.GetComponent<Tile>().materialDefault;
             newGrid[tileYPos, tileXPos] = tile.gameObject;
         }
         grid = newGrid;
         FindSameTiles();
+        print("right");
         canClickAgain = true;
+        isPlayerClicked = false;
         print("now");
     }
 }
