@@ -9,18 +9,17 @@ public class Tile : MonoBehaviour
     public GameObject nextConnectedTile = null;
     public GameObject previousConnectedTile = null;
 
-    private bool blast = false;
 
     Rigidbody tileRigidBody;
-    private bool preventBounce = false;
+    BoardManager boardManager;
 
     [SerializeField] public Material materialDefault;
     [SerializeField] public Material materialA;
     [SerializeField] public Material materialB;
     [SerializeField] public Material materialC;
     
+    private bool blastTheTile = false;
 
-    BoardManager boardManager;
     
     void Start()
     {
@@ -28,18 +27,9 @@ public class Tile : MonoBehaviour
         boardManager = FindObjectOfType<BoardManager>();
     }
 
-    private void FixedUpdate() 
-    {
-        if(preventBounce)
-        {
-            tileRigidBody.velocity = Vector3.zero;
-            return;
-
-        }
-    }
     void Update()
     {
-        if(blast)
+        if(blastTheTile)
         {
             boardManager.isPlayerClicked = true;
             GameObject _nextConnectedTile = nextConnectedTile;
@@ -60,23 +50,9 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other) 
-    {
-        if(other.gameObject.tag == "Tile" || other.gameObject.tag == "Floor")
-        {
-            //preventBounce = true;
-        }
-    }
-
     private void OnMouseDown() 
     {
         if((nextConnectedTile != null || previousConnectedTile != null) && boardManager.canClickAgain)
-            blast = true;
+            blastTheTile = true;
     }
-
-    private void ChangeIcon()
-    {
-
-    }
-
 }

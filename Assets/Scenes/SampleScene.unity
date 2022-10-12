@@ -299,23 +299,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28e6a3200fa1fb45b76c5ada4b485f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRows: 4
-  numberOfCollums: 10
-  numberOfColors: 4
+  numberOfRows: 6
+  numberOfCollums: 6
+  numberOfColors: 3
   A: 4
   B: 7
   C: 9
   tiles:
+  - {fileID: 4552208793585676346, guid: 5fd9d400e505e50478b0d5b1a9effd4b, type: 3}
   - {fileID: 608434824334458820, guid: cce5046974f5ae74ca1c69f4677e4763, type: 3}
   - {fileID: 7559568704663865014, guid: d27ea47b7818e744284d585a789ce23b, type: 3}
   - {fileID: 7656819010252485936, guid: 82f16c3c498c08a45a545d4af662b34f, type: 3}
-  - {fileID: 4552208793585676346, guid: 5fd9d400e505e50478b0d5b1a9effd4b, type: 3}
   - {fileID: 4515543704248903060, guid: df889bd168114134c99a50a50124447c, type: 3}
   - {fileID: 7745100287191198071, guid: e3b479cf7384c0c43b83d719b2227997, type: 3}
   allTileInstances: {fileID: 1000959014}
   lookCamera: {fileID: 361420366}
   isPlayerClicked: 0
   canClickAgain: 1
+  shuffle: 0
 --- !u!4 &95873561
 Transform:
   m_ObjectHideFlags: 0
