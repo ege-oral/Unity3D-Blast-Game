@@ -5,31 +5,32 @@ using Cinemachine;
 
 public class BoardManager : MonoBehaviour
 {    
-
     [Header("Game Rules")]
-    [SerializeField][Range(2, 10)] private int numberOfRows;
-    [SerializeField][Range(2, 10)] private int numberOfCollums;
-    [SerializeField][Range(1, 6)] private int numberOfColors; 
+    [SerializeField][Range(2, 10)] private int numberOfRows = 8;     // M
+    [SerializeField][Range(2, 10)] private int numberOfCollums = 8;  // N
+    [SerializeField][Range(1, 6)] private int numberOfColors = 4;    // K
     [SerializeField] private int A = 4;
     [SerializeField] private int B = 7;
     [SerializeField] private int C = 9;
 
     GameObject [,] grid;
-    [SerializeField] GameObject[] tiles;
-    [SerializeField] GameObject allTileInstances;
+    [SerializeField] GameObject[] tiles;                             // Contains tile prefabs.
+    [SerializeField] GameObject allTileInstances;                    // The object that holds all the tiles inside.
     [SerializeField] CinemachineVirtualCamera lookCamera;
 
     List<int> missingCollums = new List<int>();
-    public bool isPlayerClicked = false;
+    GameObject lastCreatedTile = null;
+
     public bool canClickAgain = true;
+    public bool isTileClicked = false;
     public bool shuffle = false;
 
-    GameObject lastCreatedTile = null;
 
     private void Awake() 
     {
         grid = new GameObject[numberOfRows, numberOfCollums];
 
+        // We adjust camera position for dynamic sizing grid.
         BoardAndCameraStartSize();
         FillTheBoard();
         FindSameTiles();
@@ -37,8 +38,7 @@ public class BoardManager : MonoBehaviour
 
     private void Update() 
     {
-
-        if(isPlayerClicked && canClickAgain)
+        if(isTileClicked && canClickAgain)
         {
             canClickAgain = false;
             FindMissingCollumPositions();
@@ -46,40 +46,10 @@ public class BoardManager : MonoBehaviour
         }
         if(lastCreatedTile != null && lastCreatedTile.transform.position.y <= numberOfRows - 1)
         {
+            // We use DFS algorithm in here.
             CreateNewMatrix();
             lastCreatedTile = null;
         }
-    }
-
-
-    private void BoardAndCameraStartSize()
-    {
-        if(numberOfRows % 2 == 1)
-        {
-            Vector3 newPos = new Vector3(transform.position.x, numberOfRows / 2, 1f);  
-            transform.position = newPos;
-            lookCamera.transform.position = new Vector3(newPos.x, newPos.y, -1f);
-        }
-        else
-        {
-            Vector3 newPos = new Vector3(transform.position.x, (numberOfRows / 2) - 0.5f, 1f);
-            transform.position = newPos;
-            lookCamera.transform.position = new Vector3(newPos.x, newPos.y, -1f);
-        }
-
-        if(numberOfCollums % 2 == 1)
-        {
-            Vector3 newPos = new Vector3(numberOfCollums / 2, transform.position.y, 1f);  
-            transform.position = newPos;
-            lookCamera.transform.position = new Vector3(newPos.x, newPos.y, -1f);
-        }
-        else
-        {
-            Vector3 newPos = new Vector3((numberOfCollums / 2) - 0.5f, transform.position.y, 1f); 
-            transform.position = newPos;
-            lookCamera.transform.position = new Vector3(newPos.x, newPos.y, -1f);
-        }
-        transform.localScale = new Vector3(numberOfCollums, numberOfRows, 1f);  
     }
 
     private void FillTheBoard()
@@ -99,6 +69,8 @@ public class BoardManager : MonoBehaviour
 
     private void FindSameTiles()
     {
+        // If every int value in theNumberOfConnectionThatTileHas is 1 that means every tile has only one connection.
+        // Which is the tile itself so we need to shuffle.
         List<int> theNumberOfConnectionThatTileHas = new List<int>();
         for(int row = 0; row < grid.GetLength(0); row++)
         {
@@ -124,14 +96,21 @@ public class BoardManager : MonoBehaviour
         }
         CheckIfTilesNeedShuffle(theNumberOfConnectionThatTileHas);
         
-        
         canClickAgain = true;
-        isPlayerClicked = false;
+        isTileClicked = false;
     }
 
     private void ExploreGrid(GameObject[,] grid, int row, int col, 
-                         string tileColor, List<GameObject> connectedTiles)
+                             string tileColor, List<GameObject> connectedTiles)
     {
+        // We use DFS algorithm in here.
+        // If the row is within the grid area.
+        // If the collum is within the grid area.
+        // If the tile color matches with the given parameter.
+        // If the tile is NOT visited.
+        // We sets the isVisited value to true, then adding the gameObject to connectedTiles list.
+        // Finally we recursively call this function again with different grid and collum arguments.
+
         if(!(row >= 0) || !(row < grid.GetLength(0))) { return; }
         if(!(col >= 0) || !(col < grid.GetLength(1))) { return; }
 
@@ -173,15 +152,21 @@ public class BoardManager : MonoBehaviour
                                              new Vector3(missingCollum, gameObject.transform.position.y * 2 + 2, 0f),
                                              Quaternion.Euler(0f,0f,180f));
             newTile.transform.parent = allTileInstances.transform;
-            yield return new WaitForSeconds(0.2f);
+       
+            yield return new WaitForSeconds(0.1f);
         }
         missingCollums.Clear();
+
+        // We keeps track of last created tile.
+        // Later we will need this object's value position.
         lastCreatedTile = newTile;
     }
 
     private void CreateNewMatrix()
     {
         GameObject[,] newGrid = new GameObject[numberOfRows, numberOfCollums];
+        // We resets every gameObject's connections, visited value and material values.
+        // Then create another grid.
         foreach(Transform tile in allTileInstances.transform)
         {   
             int tileXPos = Mathf.RoundToInt(tile.gameObject.transform.position.x);
@@ -250,5 +235,35 @@ public class BoardManager : MonoBehaviour
         }
         FillTheBoard();
         FindSameTiles();
+    }
+
+    private void BoardAndCameraStartSize()
+    {
+        if(numberOfRows % 2 == 1)
+        {
+            Vector3 newPos = new Vector3(transform.position.x, numberOfRows / 2, 1f);  
+            transform.position = newPos;
+            lookCamera.transform.position = new Vector3(newPos.x, newPos.y, -1f);
+        }
+        else
+        {
+            Vector3 newPos = new Vector3(transform.position.x, (numberOfRows / 2) - 0.5f, 1f);
+            transform.position = newPos;
+            lookCamera.transform.position = new Vector3(newPos.x, newPos.y, -1f);
+        }
+
+        if(numberOfCollums % 2 == 1)
+        {
+            Vector3 newPos = new Vector3(numberOfCollums / 2, transform.position.y, 1f);  
+            transform.position = newPos;
+            lookCamera.transform.position = new Vector3(newPos.x, newPos.y, -1f);
+        }
+        else
+        {
+            Vector3 newPos = new Vector3((numberOfCollums / 2) - 0.5f, transform.position.y, 1f); 
+            transform.position = newPos;
+            lookCamera.transform.position = new Vector3(newPos.x, newPos.y, -1f);
+        }
+        transform.localScale = new Vector3(numberOfCollums, numberOfRows, 1f);  
     }
 }
