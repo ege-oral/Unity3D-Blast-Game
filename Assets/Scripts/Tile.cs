@@ -6,7 +6,6 @@ public class Tile : MonoBehaviour
 {
     public bool isVisited = false;
     [SerializeField] public string tileColor;
-
     public GameObject nextConnectedTile = null;
     public GameObject previousConnectedTile = null;
 
@@ -14,7 +13,12 @@ public class Tile : MonoBehaviour
 
     Rigidbody tileRigidBody;
     private bool preventBounce = false;
-    private bool hasCollide = false;
+
+    [SerializeField] Material materialDefault;
+    [SerializeField] Material materialA;
+    [SerializeField] Material materialB;
+    [SerializeField] Material materialC;
+    
 
     BoardManager boardManager;
     
@@ -66,7 +70,13 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown() 
     {
-        blast = true;
+        if(boardManager.canClickAgain)
+            blast = true;
+    }
+
+    private void ChangeIcon()
+    {
+
     }
 
 }

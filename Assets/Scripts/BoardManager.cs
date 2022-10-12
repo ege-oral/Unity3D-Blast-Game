@@ -21,6 +21,7 @@ public class BoardManager : MonoBehaviour
 
     List<int> arr = new List<int>();
     public bool isPlayerClicked = false;
+    public bool canClickAgain = true;
 
     private void Awake() 
     {
@@ -32,11 +33,10 @@ public class BoardManager : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.R))
-            StartCoroutine(CheckGrid());
 
-        if(isPlayerClicked)
+        if(isPlayerClicked && canClickAgain)
         {
+            canClickAgain = false;
             CheckIfGridChanged();
             StartCoroutine(FillMissingPlaces());
             
@@ -84,7 +84,7 @@ public class BoardManager : MonoBehaviour
             {
                 GameObject tile = Instantiate(tiles[Random.Range(0,numberOfColors)], 
                                               new Vector3(collum, row, 0f), 
-                                              Quaternion.identity);
+                                              Quaternion.Euler(0f,0f,180f));
                 grid[row, collum] = tile;
                 tile.transform.parent = allTileInstances.transform;
             }
@@ -110,6 +110,7 @@ public class BoardManager : MonoBehaviour
                         connectedList[i + 1].GetComponent<Tile>().previousConnectedTile = connectedList[i];
                     }
                 }
+                print(connectedList.Count);
             }
         }
     }
@@ -130,22 +131,6 @@ public class BoardManager : MonoBehaviour
         ExploreGrid(grid, row, col - 1, tileColor, connectedList);
     }
 
-    IEnumerator CheckGrid()
-    {
-        for (int i = 0; i < grid.GetLength(0); i++)
-        {
-            for(int j = 0; j < grid.GetLength(1); j++)
-            {
-                if(grid[i, j] == null)
-                {
-                    Instantiate(tiles[Random.Range(0,numberOfColors)],
-                                new Vector3(j, 10f, 0f),
-                                Quaternion.identity);
-                    yield return new WaitForSeconds(.1f);
-                }
-            }
-        }
-    }
 
     private void CheckIfGridChanged()
     {
@@ -163,40 +148,21 @@ public class BoardManager : MonoBehaviour
 
     IEnumerator FillMissingPlaces()
     {
+        GameObject newTile = null;
         foreach(int missingCollum in arr)
         {
-            GameObject newTile = Instantiate(tiles[Random.Range(0,numberOfColors)],
-                                             new Vector3(missingCollum, 10f, 0f),
-                                             Quaternion.identity);
+            newTile = Instantiate(tiles[Random.Range(0,numberOfColors)],
+                                             new Vector3(missingCollum, gameObject.transform.position.y * 2 + 2, 0f),
+                                             Quaternion.Euler(0f,0f,180f));
             newTile.transform.parent = allTileInstances.transform;
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(0.05f);
         }
         arr.Clear();
-        yield return new WaitForSeconds(4f);
+        
+        yield return new WaitForSeconds(1f);
         CreateNewMatrix();
-
     }
 
-    // IEnumerator CreateNewMatrix()
-    // {
-    //     yield return new WaitForSeconds(3f);
-    //     print("yes");
-    //     GameObject[,] newGrid = new GameObject[numberOfRows, numberOfCollums];
-    //     foreach(Transform tile in allTileInstances.transform)
-    //     {   
-    //         int tileXPos = Mathf.RoundToInt(tile.gameObject.transform.position.x);
-    //         int tileYPos = Mathf.RoundToInt(tile.gameObject.transform.position.y);
-
-    //         newGrid[tileYPos, tileXPos] = tile.gameObject;
-    //     }
-    //     grid = newGrid;
-    //     for(int i = 0; i < grid.GetLength(0); i++)
-    //         for(int j = 0; j < grid.GetLength(1); j++)
-    //             print(grid[i,j]);
-
-    //     FindSameTiles();
-    //     print("now");
-    // }
     
     private void CreateNewMatrix()
     {
@@ -213,6 +179,7 @@ public class BoardManager : MonoBehaviour
         }
         grid = newGrid;
         FindSameTiles();
+        canClickAgain = true;
         print("now");
     }
 }

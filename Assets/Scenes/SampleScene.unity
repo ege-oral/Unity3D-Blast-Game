@@ -299,9 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28e6a3200fa1fb45b76c5ada4b485f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRows: 8
-  numberOfCollums: 8
-  numberOfColors: 4
+  numberOfRows: 2
+  numberOfCollums: 4
+  numberOfColors: 3
   A: 0
   B: 0
   C: 0
@@ -315,6 +315,7 @@ MonoBehaviour:
   allTileInstances: {fileID: 1000959014}
   lookCamera: {fileID: 361420366}
   isPlayerClicked: 0
+  canClickAgain: 1
 --- !u!4 &95873561
 Transform:
   m_ObjectHideFlags: 0
