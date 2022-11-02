@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Tile.TileScriptableObject;
+using Tile.TileBlast;
 
 namespace Tile.TileObject
 {
@@ -10,29 +11,31 @@ namespace Tile.TileObject
         Rigidbody tileRigidBody;
         BoardManager boardManager;
         
+        // Tile scriptable object reference.
         public TileSO tileSO;
 
-        public bool isVisited;
         public string tileColor;
-        public GameObject nextConnectedTile;     // Next connection to same color tile.
-        public GameObject previousConnectedTile;  // Previous connection to same color tile.
-
-        private bool blastTheTile;
         public Material materialDefault;
         public Material materialA;
         public Material materialB;
         public Material materialC;
+        
+        public bool isVisited;
+        private bool blastTheTile;
 
-        
-        
+        public GameObject nextConnectedTile;     // Next connection to same color tile.
+        public GameObject previousConnectedTile;  // Previous connection to same color tile.
+
+
         private void Awake()
         {
             tileRigidBody = GetComponent<Rigidbody>();
             boardManager = FindObjectOfType<BoardManager>();
 
+            // The scriptable object content is copied to the current tile.
             CopyScriptableObjectContent();
-            
         }
+
         private void FixedUpdate() 
         {
             // We don't allow any positive upward velocity.
@@ -43,27 +46,8 @@ namespace Tile.TileObject
         {
             if(blastTheTile)
             {
-                // Destroy, every connection that tile has.
-
-                boardManager.isTileClicked = true;
-
-                GameObject _nextConnectedTile = nextConnectedTile;
-                while(_nextConnectedTile != null)
-                {
-                    _nextConnectedTile = _nextConnectedTile.GetComponent<TileObjectInstance>().nextConnectedTile;
-                    Destroy(_nextConnectedTile);
-                }
-
-                GameObject _previousConnectedTile = previousConnectedTile;
-                while(_previousConnectedTile != null)
-                {
-                    _previousConnectedTile = _previousConnectedTile.GetComponent<TileObjectInstance>().previousConnectedTile;
-                    Destroy(_previousConnectedTile);
-                }
-
-                Destroy(nextConnectedTile);
-                Destroy(previousConnectedTile);
-                Destroy(gameObject);
+                // Destroy, every connection that this tile has.
+                TileBlastHandler.BlastAllConnectedTiles(boardManager, gameObject, nextConnectedTile, previousConnectedTile);
             }
         }
 
@@ -78,15 +62,17 @@ namespace Tile.TileObject
 
         private void CopyScriptableObjectContent()
         {
-            isVisited = tileSO.isVisited;
             tileColor = tileSO.tileColor.ToString();
-            nextConnectedTile = tileSO.nextConnectedTile;
-            previousConnectedTile = tileSO.previousConnectedTile;
-            blastTheTile = tileSO.blastTheTile;
             materialDefault = tileSO.materialDefault;
             materialA = tileSO.materialA;
             materialB = tileSO.materialB;
             materialC = tileSO.materialC;
+
+            nextConnectedTile = tileSO.nextConnectedTile;
+            previousConnectedTile = tileSO.previousConnectedTile;
+
+            isVisited = tileSO.isVisited;
+            blastTheTile = tileSO.blastTheTile;
         }
         
     }
