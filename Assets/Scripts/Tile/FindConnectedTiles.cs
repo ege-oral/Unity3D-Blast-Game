@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Tile.TileObject;
+using Tile.TileIcon;
 
-namespace Board.FindTiles
+namespace Tile.FindTiles
 {    
     public class FindConnectedTiles : MonoBehaviour
     {
         public static void FindAllConnectedTiles(GameObject[,] grid, ref bool canClickAgain, ref bool isTileClicked, int A, int B, int C)
         {
-            // If every int value in theNumberOfConnectionThatTileHas is 1 that means every tile has only one connection.
+            // If every int value in tileConnections is 1 that means every tile has only one connection.
             // Which is the tile itself so we need to shuffle.
-            List<int> theNumberOfConnectionThatTileHas = new List<int>();
+            List<int> tileConnections = new List<int>();
             for(int row = 0; row < grid.GetLength(0); row++)
             {
                 for(int col = 0; col < grid.GetLength(1); col++)
@@ -28,11 +29,11 @@ namespace Board.FindTiles
                         {
                             connectedTiles[i].gameObject.GetComponent<TileObjectInstance>().nextConnectedTile = connectedTiles[i + 1];
                             connectedTiles[i + 1].GetComponent<TileObjectInstance>().previousConnectedTile = connectedTiles[i];
-
-                            ChangeTilesIcon(connectedTiles, i, A, B, C);
+                            ChangeTilesIcon.ChangeConnectedTilesIcon(connectedTiles, i, A, B, C);
+                            // ChangeTilesIcon(connectedTiles, i, A, B, C);
                         }
                     }
-                    theNumberOfConnectionThatTileHas.Add(connectedTiles.Count);
+                    tileConnections.Add(connectedTiles.Count);
                 }
             }
             //CheckIfTilesNeedShuffle(theNumberOfConnectionThatTileHas);
@@ -67,37 +68,6 @@ namespace Board.FindTiles
             ExploreGrid(grid, row - 1, col, tileColor, connectedTiles);
             ExploreGrid(grid, row, col + 1, tileColor, connectedTiles);
             ExploreGrid(grid, row, col - 1, tileColor, connectedTiles);
-        }
-        
-        private static void ChangeTilesIcon(List<GameObject> connectedTiles, int i, int A, int B, int C)
-        {
-            int numberOfTileInConnectedList = connectedTiles.Count;
-
-            TileObjectInstance _currentTile = connectedTiles[i].GetComponent<TileObjectInstance>();
-
-            MeshRenderer currentTileMeshRenderer = connectedTiles[i].GetComponent<MeshRenderer>();
-            MeshRenderer nextTileMeshRenderer = connectedTiles[i + 1].GetComponent<MeshRenderer>();
-
-            if(numberOfTileInConnectedList <= A)
-            {
-                currentTileMeshRenderer.material = _currentTile.materialDefault;
-                nextTileMeshRenderer.material = _currentTile.materialDefault;
-            }
-            else if(numberOfTileInConnectedList > A && numberOfTileInConnectedList <= B)
-            {
-                currentTileMeshRenderer.material = _currentTile.materialA;
-                nextTileMeshRenderer.material = _currentTile.materialA;
-            }
-            else if(numberOfTileInConnectedList > B && numberOfTileInConnectedList <= C)
-            {
-                currentTileMeshRenderer.material = _currentTile.materialB;
-                nextTileMeshRenderer.material = _currentTile.materialB;
-            }
-            else
-            {
-                currentTileMeshRenderer.material = _currentTile.materialC;
-                nextTileMeshRenderer.material = _currentTile.materialC;
-            }
         }
     }
 
