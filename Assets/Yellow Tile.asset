@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e1bb20f67b397743998d94ec966e315, type: 3}
+  m_Name: Yellow Tile
+  m_EditorClassIdentifier: 
+  tileColor: 0
+  materialDefault: {fileID: 2100000, guid: 4d2d97103b89f0b41ba6fb3c6e2c7b8c, type: 2}
+  materialA: {fileID: 2100000, guid: 2828ab57742c57d479d745c986bf7ef7, type: 2}
+  materialB: {fileID: 2100000, guid: a5840e3685a36d146abdf108eccaabf6, type: 2}
+  materialC: {fileID: 2100000, guid: 49ab2bb489fec5945831b94669492618, type: 2}

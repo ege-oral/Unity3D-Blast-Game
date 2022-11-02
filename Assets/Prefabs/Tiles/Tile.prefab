@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3674610410521420022}
   - component: {fileID: 3674610410521420017}
   - component: {fileID: 3674610410521420016}
-  - component: {fileID: 1259791261907798684}
+  - component: {fileID: 8437707460657197483}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Tile
@@ -115,7 +115,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1259791261907798684
+--- !u!114 &8437707460657197483
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a256d241ff3a684fa2c94fae1970901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileSO: {fileID: 0}
   isVisited: 0
   tileColor: 
   nextConnectedTile: {fileID: 0}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e1bb20f67b397743998d94ec966e315, type: 3}
+  m_Name: Blue Tile
+  m_EditorClassIdentifier: 
+  tileColor: 1
+  materialDefault: {fileID: 2100000, guid: 6c1be8d1eea4a694a8693d9b6233cfee, type: 2}
+  materialA: {fileID: 2100000, guid: aba8621950eb4314aaaaa0623bf79992, type: 2}
+  materialB: {fileID: 2100000, guid: 2d229a426801c1f4091a238520ceb4bb, type: 2}
+  materialC: {fileID: 2100000, guid: 31a5a8fba70730c4eac83146fba3b707, type: 2}

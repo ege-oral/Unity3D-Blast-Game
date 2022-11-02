@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Tile.TileObject;
 
 public class BoardManager : MonoBehaviour
 {    
@@ -26,7 +27,7 @@ public class BoardManager : MonoBehaviour
     public bool shuffle = false;
 
 
-    private void Awake() 
+    private void Start() 
     {
         grid = new GameObject[numberOfRows, numberOfCollums];
 
@@ -78,15 +79,15 @@ public class BoardManager : MonoBehaviour
             {
                 List<GameObject> connectedTiles = new List<GameObject>();
                 GameObject currentTile = grid[row, col];
-                if(!currentTile.GetComponent<Tile>().isVisited)
+                if(!currentTile.GetComponent<TileObjectInstance>().isVisited)
                 {
-                    string tileColor = currentTile.GetComponent<Tile>().tileColor.ToString();
+                    string tileColor = currentTile.GetComponent<TileObjectInstance>().tileColor.ToString();
                     ExploreGrid(grid, row, col, tileColor, connectedTiles);
 
                     for(int i = 0; i < connectedTiles.Count - 1; i++)
                     {
-                        connectedTiles[i].gameObject.GetComponent<Tile>().nextConnectedTile = connectedTiles[i + 1];
-                        connectedTiles[i + 1].GetComponent<Tile>().previousConnectedTile = connectedTiles[i];
+                        connectedTiles[i].gameObject.GetComponent<TileObjectInstance>().nextConnectedTile = connectedTiles[i + 1];
+                        connectedTiles[i + 1].GetComponent<TileObjectInstance>().previousConnectedTile = connectedTiles[i];
 
                         ChangeTilesIcon(connectedTiles, i);
                     }
@@ -94,6 +95,7 @@ public class BoardManager : MonoBehaviour
                 theNumberOfConnectionThatTileHas.Add(connectedTiles.Count);
             }
         }
+        print(theNumberOfConnectionThatTileHas);
         CheckIfTilesNeedShuffle(theNumberOfConnectionThatTileHas);
         
         canClickAgain = true;
@@ -114,7 +116,7 @@ public class BoardManager : MonoBehaviour
         if(!(row >= 0) || !(row < grid.GetLength(0))) { return; }
         if(!(col >= 0) || !(col < grid.GetLength(1))) { return; }
 
-        Tile _tile = grid[row,col].GetComponent<Tile>();
+        TileObjectInstance _tile = grid[row,col].GetComponent<TileObjectInstance>();
         
         if(_tile.tileColor.ToString() != tileColor.ToString()) { return; }
         if(_tile.isVisited) {return; }
@@ -171,10 +173,10 @@ public class BoardManager : MonoBehaviour
         {   
             int tileXPos = Mathf.RoundToInt(tile.gameObject.transform.position.x);
             int tileYPos = Mathf.RoundToInt(tile.gameObject.transform.position.y);
-            tile.gameObject.GetComponent<Tile>().nextConnectedTile = null;
-            tile.gameObject.GetComponent<Tile>().previousConnectedTile = null;
-            tile.gameObject.GetComponent<Tile>().isVisited = false;
-            tile.gameObject.GetComponent<MeshRenderer>().material = tile.gameObject.GetComponent<Tile>().materialDefault;
+            tile.gameObject.GetComponent<TileObjectInstance>().nextConnectedTile = null;
+            tile.gameObject.GetComponent<TileObjectInstance>().previousConnectedTile = null;
+            tile.gameObject.GetComponent<TileObjectInstance>().isVisited = false;
+            tile.gameObject.GetComponent<MeshRenderer>().material = tile.gameObject.GetComponent<TileObjectInstance>().materialDefault;
             newGrid[tileYPos, tileXPos] = tile.gameObject;
         }
 
@@ -186,7 +188,7 @@ public class BoardManager : MonoBehaviour
     {
         int numberOfTileInConnectedList = connectedTiles.Count;
 
-        Tile _currentTile = connectedTiles[i].GetComponent<Tile>();
+        TileObjectInstance _currentTile = connectedTiles[i].GetComponent<TileObjectInstance>();
 
         MeshRenderer currentTileMeshRenderer = connectedTiles[i].GetComponent<MeshRenderer>();
         MeshRenderer nextTileMeshRenderer = connectedTiles[i + 1].GetComponent<MeshRenderer>();

@@ -79,5 +79,9 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6c1be8d1eea4a694a8693d9b6233cfee, type: 2}
+    - target: {fileID: 8437707460657197483, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
+      propertyPath: tileSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 2c0de7efdf734cf43b2b07354d65879f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26101dae3e2fdfd4fa917a01f154bce0, type: 3}
