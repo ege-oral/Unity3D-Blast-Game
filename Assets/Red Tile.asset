@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1bb20f67b397743998d94ec966e315, type: 3}
   m_Name: Red Tile
   m_EditorClassIdentifier: 
-  tileColor: 0
-  materialDefault: {fileID: 0}
-  materialA: {fileID: 0}
-  materialB: {fileID: 0}
-  materialC: {fileID: 0}
+  tileColor: 5
+  materialDefault: {fileID: 2100000, guid: ea5225512292cf546ba76450351145df, type: 2}
+  materialA: {fileID: 2100000, guid: 633cc2f9876e7ae44b6e923876690215, type: 2}
+  materialB: {fileID: 2100000, guid: b2e769647e701b54bbdba10108c85f3c, type: 2}
+  materialC: {fileID: 2100000, guid: b73d714be08b7ff4c8942ad58b216751, type: 2}

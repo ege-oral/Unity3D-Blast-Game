@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1bb20f67b397743998d94ec966e315, type: 3}
   m_Name: Pink Tile
   m_EditorClassIdentifier: 
-  tileColor: 0
-  materialDefault: {fileID: 0}
-  materialA: {fileID: 0}
-  materialB: {fileID: 0}
-  materialC: {fileID: 0}
+  tileColor: 3
+  materialDefault: {fileID: 2100000, guid: f8e30faa7d7d50a4282a1e671aea8fa7, type: 2}
+  materialA: {fileID: 2100000, guid: e8122a07e02a8164590dd029dd117fb0, type: 2}
+  materialB: {fileID: 2100000, guid: c72197f58ff68304996f1c82fb8a0215, type: 2}
+  materialC: {fileID: 2100000, guid: 0d5028cfbbd3b6f45b8d7e74c74d37bb, type: 2}

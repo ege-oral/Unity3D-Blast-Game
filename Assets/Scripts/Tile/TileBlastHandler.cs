@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Tile.TileObject;
+using Board;
 
 namespace Tile.TileBlast
 {
     public class TileBlastHandler : MonoBehaviour
-    {
+    {   
         public static void BlastAllConnectedTiles(BoardManager boardManager, GameObject currentTile, 
                                                   GameObject nextConnectedTile, GameObject previousConnectedTile)
         {

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1bb20f67b397743998d94ec966e315, type: 3}
   m_Name: Purple Tile
   m_EditorClassIdentifier: 
-  tileColor: 0
-  materialDefault: {fileID: 0}
-  materialA: {fileID: 0}
-  materialB: {fileID: 0}
-  materialC: {fileID: 0}
+  tileColor: 4
+  materialDefault: {fileID: 2100000, guid: 8af21ed5a8ef6004587dc9c2c20268ae, type: 2}
+  materialA: {fileID: 2100000, guid: d453517c4ed16c147be402fc9379517c, type: 2}
+  materialB: {fileID: 2100000, guid: a4235d1ee4610364c9870278ea995922, type: 2}
+  materialC: {fileID: 2100000, guid: 35672437043eaed43ba3f71eae32d9bb, type: 2}

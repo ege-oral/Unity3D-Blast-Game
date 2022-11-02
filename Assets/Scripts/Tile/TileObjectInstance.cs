@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tile.TileScriptableObject;
 using Tile.TileBlast;
+using Board;
 
 namespace Tile.TileObject
 {
@@ -23,7 +24,7 @@ namespace Tile.TileObject
         public bool isVisited;
         private bool blastTheTile;
 
-        public GameObject nextConnectedTile;     // Next connection to same color tile.
+        public GameObject nextConnectedTile;      // Next connection to same color tile.
         public GameObject previousConnectedTile;  // Previous connection to same color tile.
 
 
@@ -42,7 +43,7 @@ namespace Tile.TileObject
             Mathf.Clamp(tileRigidBody.velocity.y, -10f, 0);
         }
 
-        void Update()
+        private void Update()
         {
             if(blastTheTile)
             {
@@ -53,7 +54,7 @@ namespace Tile.TileObject
 
         private void OnMouseDown() 
         {
-            // If tile has at least 2 connection and if the new grid is created.
+            // If tile has at least 2 connection and if the new grid creation completed.
             if((nextConnectedTile != null || previousConnectedTile != null) && boardManager.canClickAgain)
             {
                 blastTheTile = true;
