@@ -659,6 +659,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7660165357419390598, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
+      propertyPath: lookCamera
+      value: 
+      objectReference: {fileID: 361420366}
     - target: {fileID: 9036256395335082368, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
       propertyPath: m_Name
       value: Board Manager
@@ -711,6 +715,14 @@ PrefabInstance:
       propertyPath: lookCamera
       value: 
       objectReference: {fileID: 361420366}
+    - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
+      propertyPath: numberOfRows
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
+      propertyPath: numberOfColumns
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
       propertyPath: allTileInstances
       value: 

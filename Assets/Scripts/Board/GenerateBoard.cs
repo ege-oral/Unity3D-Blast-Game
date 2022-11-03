@@ -8,16 +8,13 @@ namespace Board.Generate
     {
         BoardManager boardManager;
 
-        private void Start() 
-        {
-            boardManager = GetComponent<BoardManager>();
-        }
+        private void Start() => boardManager = GetComponent<BoardManager>();
 
         public void FillTheBoard()
         {   
             for(int row = 0; row < boardManager.NumberOfRows; row++)
             {
-                for(int collum = 0; collum < boardManager.NumberOfCollums; collum++)
+                for(int collum = 0; collum < boardManager.NumberOfColumns; collum++)
                 {
                     GameObject tile = Instantiate(boardManager.tiles[Random.Range(0, boardManager.NumberOfColors)], 
                                                   new Vector3(collum, row, 0f), 

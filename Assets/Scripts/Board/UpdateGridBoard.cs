@@ -18,9 +18,9 @@ namespace Board.GridBoard
             findConnectedTiles = GetComponent<FindConnectedTiles>();
         }
 
-        public void CreateNewMatrix()
+        public void CreateNewGridBoard()
         {
-            GameObject[,] newGrid = new GameObject[boardManager.NumberOfRows, boardManager.NumberOfCollums];
+            GameObject[,] newGrid = new GameObject[boardManager.NumberOfRows, boardManager.NumberOfColumns];
             // We resets every gameObject's connections, visited value and material values.
             // Then create another grid.
             foreach(Transform tile in boardManager.allTileInstances.transform)
