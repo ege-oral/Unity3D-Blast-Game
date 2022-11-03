@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 274634498963053913}
   - component: {fileID: 6526749015458917332}
   - component: {fileID: 521779060}
+  - component: {fileID: 8080142042479259161}
   m_Layer: 0
   m_Name: Board Manager
   m_TagString: Untagged
@@ -100,12 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28e6a3200fa1fb45b76c5ada4b485f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRows: 2
-  numberOfCollums: 2
-  numberOfColors: 6
-  A: 4
-  B: 7
-  C: 9
   tiles:
   - {fileID: 4552208793585676346, guid: 5fd9d400e505e50478b0d5b1a9effd4b, type: 3}
   - {fileID: 608434824334458820, guid: cce5046974f5ae74ca1c69f4677e4763, type: 3}
@@ -164,5 +159,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d61d66edb76420344b88fb1e1627db5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8080142042479259161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036256395335082368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4c137d53aa1464c90b2e1df0bd13b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -408,23 +408,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &521779053 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9036256395335082368, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
-  m_PrefabInstance: {fileID: 9036256395262577557}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &521779060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521779053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61d66edb76420344b88fb1e1627db5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,17 +659,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 274634498963053913, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9036256395335082368, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
       propertyPath: m_Name
       value: Board Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 9036256395335082371, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9036256395335082380, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
       propertyPath: m_RootOrder
@@ -737,24 +712,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 361420366}
     - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
-      propertyPath: numberOfRows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
-      propertyPath: numberOfColors
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
-      propertyPath: numberOfCollums
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
       propertyPath: allTileInstances
       value: 
       objectReference: {fileID: 1000959014}
-    - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
-      propertyPath: scriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 2c0de7efdf734cf43b2b07354d65879f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db65c2d8e4908ac449180a75ec584591, type: 3}

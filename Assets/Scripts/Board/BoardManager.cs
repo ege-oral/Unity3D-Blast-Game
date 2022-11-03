@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using Board.Generate;
-using Board.ChangeTilesIcon;
 using Board.FindTiles;
+using Board.GridBoard;
 using Tile.TileObject;
 
 namespace Board
@@ -29,7 +29,6 @@ namespace Board
         public int C { get { return c; } }
 
 
-
         public GameObject [,] grid;
         public GameObject[] tiles;                             // Contains tile prefabs.
         public GameObject allTileInstances;                    // The object that holds all the tiles inside.
@@ -44,6 +43,7 @@ namespace Board
         
         GenerateBoard generateBoard;
         FindConnectedTiles findConnectedTiles;
+        UpdateGridBoard updateGridBoard;
 
         private void Start() 
         {
@@ -52,6 +52,8 @@ namespace Board
             // We adjust camera position for dynamic sizing grid.
             BoardAndCameraStartSize();
 
+            updateGridBoard = GetComponent<UpdateGridBoard>();
+            
             generateBoard = GetComponent<GenerateBoard>();    
             generateBoard.FillTheBoard();
             
@@ -67,10 +69,10 @@ namespace Board
                 FindMissingCollumPositions();
                 StartCoroutine(FillMissingPlaces());
             }
+
             if(lastCreatedTile != null && lastCreatedTile.transform.position.y <= numberOfRows - 1)
             {
-                // We use DFS algorithm in here.
-                CreateNewMatrix();
+                updateGridBoard.CreateNewMatrix();
                 lastCreatedTile = null;
             }
         }
@@ -98,7 +100,6 @@ namespace Board
                                                 new Vector3(missingCollum, gameObject.transform.position.y * 2 + 2, 0f),
                                                 Quaternion.Euler(0f,0f,180f));
                 newTile.transform.parent = allTileInstances.transform;
-        
                 yield return new WaitForSeconds(0.1f);
             }
             missingCollums.Clear();
@@ -108,26 +109,25 @@ namespace Board
             lastCreatedTile = newTile;
         }
 
-        private void CreateNewMatrix()
-        {
-            GameObject[,] newGrid = new GameObject[numberOfRows, numberOfCollums];
-            // We resets every gameObject's connections, visited value and material values.
-            // Then create another grid.
-            foreach(Transform tile in allTileInstances.transform)
-            {   
-                int tileXPos = Mathf.RoundToInt(tile.gameObject.transform.position.x);
-                int tileYPos = Mathf.RoundToInt(tile.gameObject.transform.position.y);
-                tile.gameObject.GetComponent<TileObjectInstance>().nextConnectedTile = null;
-                tile.gameObject.GetComponent<TileObjectInstance>().previousConnectedTile = null;
-                tile.gameObject.GetComponent<TileObjectInstance>().isVisited = false;
-                tile.gameObject.GetComponent<MeshRenderer>().material = tile.gameObject.GetComponent<TileObjectInstance>().materialDefault;
-                newGrid[tileYPos, tileXPos] = tile.gameObject;
-            }
+        // private void CreateNewMatrix()
+        // {
+        //     GameObject[,] newGrid = new GameObject[numberOfRows, numberOfCollums];
+        //     // We resets every gameObject's connections, visited value and material values.
+        //     // Then create another grid.
+        //     foreach(Transform tile in allTileInstances.transform)
+        //     {   
+        //         int tileXPos = Mathf.RoundToInt(tile.gameObject.transform.position.x);
+        //         int tileYPos = Mathf.RoundToInt(tile.gameObject.transform.position.y);
+        //         tile.gameObject.GetComponent<TileObjectInstance>().nextConnectedTile = null;
+        //         tile.gameObject.GetComponent<TileObjectInstance>().previousConnectedTile = null;
+        //         tile.gameObject.GetComponent<TileObjectInstance>().isVisited = false;
+        //         tile.gameObject.GetComponent<MeshRenderer>().material = tile.gameObject.GetComponent<TileObjectInstance>().materialDefault;
+        //         newGrid[tileYPos, tileXPos] = tile.gameObject;
+        //     }
 
-            grid = (GameObject[,])newGrid.Clone();
-            findConnectedTiles.FindAllConnectedTiles();
-            //FindSameTiles();
-        }
+        //     grid = (GameObject[,])newGrid.Clone();
+        //     findConnectedTiles.FindAllConnectedTiles();
+        // }
 
         private void BoardAndCameraStartSize()
         {
