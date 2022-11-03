@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3674610410521420017}
   - component: {fileID: 3674610410521420016}
   - component: {fileID: 8437707460657197483}
+  - component: {fileID: 4811378070366196736}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Tile
@@ -128,11 +129,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileSO: {fileID: 0}
-  isVisited: 0
   tileColor: 
-  nextConnectedTile: {fileID: 0}
-  previousConnectedTile: {fileID: 0}
   materialDefault: {fileID: 0}
   materialA: {fileID: 0}
   materialB: {fileID: 0}
   materialC: {fileID: 0}
+  isVisited: 0
+  nextConnectedTile: {fileID: 0}
+  previousConnectedTile: {fileID: 0}
+--- !u!114 &4811378070366196736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674610410521420019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b64ebeb6fe6f834480c627b003f754d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

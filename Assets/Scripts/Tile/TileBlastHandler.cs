@@ -8,7 +8,7 @@ namespace Tile.TileBlast
 {
     public class TileBlastHandler : MonoBehaviour
     {   
-        public static void BlastAllConnectedTiles(BoardManager boardManager, GameObject currentTile, 
+        public void BlastAllConnectedTiles(BoardManager boardManager, GameObject currentTile, 
                                                   GameObject nextConnectedTile, GameObject previousConnectedTile)
         {
             boardManager.isTileClicked = true;

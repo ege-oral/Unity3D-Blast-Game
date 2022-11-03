@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-
 using Board.Generate;
-
-using Tile.FindTiles;
+using Board.ChangeTilesIcon;
+using Board.FindTiles;
 using Tile.TileObject;
 
 namespace Board
@@ -13,17 +12,28 @@ namespace Board
     public class BoardManager : MonoBehaviour
     {    
         [Header("Game Rules")]
-        [SerializeField][Range(2, 10)] private int numberOfRows = 8;     // M
-        [SerializeField][Range(2, 10)] private int numberOfCollums = 8;  // N
-        [SerializeField][Range(1, 6)] private int numberOfColors = 4;    // K
-        [SerializeField] private int A = 4;
-        [SerializeField] private int B = 7;
-        [SerializeField] private int C = 9;
+        [SerializeField][Range(2, 10)] private readonly int numberOfRows = 8;     // M
+        [SerializeField][Range(2, 10)] private readonly int numberOfCollums = 8;  // N
+        [SerializeField][Range(1, 6)] private readonly int numberOfColors = 4;    // K
 
-        GameObject [,] grid;
-        [SerializeField] GameObject[] tiles;                             // Contains tile prefabs.
-        [SerializeField] GameObject allTileInstances;                    // The object that holds all the tiles inside.
-        [SerializeField] CinemachineVirtualCamera lookCamera;
+        public int NumberOfRows { get { return numberOfRows; } }
+        public int NumberOfCollums { get { return numberOfCollums; } }
+        public int NumberOfColors { get { return numberOfColors; } }
+
+        [SerializeField] private readonly int a = 4;
+        [SerializeField] private readonly int b = 7;
+        [SerializeField] private readonly int c = 9;
+
+        public int A { get { return a; } }
+        public int B { get { return b; } }
+        public int C { get { return c; } }
+
+
+
+        public GameObject [,] grid;
+        public GameObject[] tiles;                             // Contains tile prefabs.
+        public GameObject allTileInstances;                    // The object that holds all the tiles inside.
+        public CinemachineVirtualCamera lookCamera;
 
         List<int> missingCollums = new List<int>();
         GameObject lastCreatedTile = null;
@@ -31,7 +41,9 @@ namespace Board
         public bool canClickAgain = true;
         public bool isTileClicked = false;
         public bool shuffle = false;
-
+        
+        GenerateBoard generateBoard;
+        FindConnectedTiles findConnectedTiles;
 
         private void Start() 
         {
@@ -39,9 +51,12 @@ namespace Board
 
             // We adjust camera position for dynamic sizing grid.
             BoardAndCameraStartSize();
-            GenerateBoard.FillTheBoard(grid, numberOfRows, numberOfCollums, numberOfColors, tiles, allTileInstances);
-            FindConnectedTiles.FindAllConnectedTiles(grid, ref canClickAgain, ref isTileClicked, A, B, C);
-            //FindSameTiles();
+
+            generateBoard = GetComponent<GenerateBoard>();    
+            generateBoard.FillTheBoard();
+            
+            findConnectedTiles = GetComponent<FindConnectedTiles>();
+            findConnectedTiles.FindAllConnectedTiles();
         }
 
         private void Update() 
@@ -110,32 +125,7 @@ namespace Board
             }
 
             grid = (GameObject[,])newGrid.Clone();
-            FindConnectedTiles.FindAllConnectedTiles(grid, ref canClickAgain, ref isTileClicked, A, B, C);
-            //FindSameTiles();
-        }
-
-
-        private void CheckIfTilesNeedShuffle(List<int> theNumberOfConnectionThatTileHas)
-        {
-            if(theNumberOfConnectionThatTileHas.TrueForAll(x => x.Equals(theNumberOfConnectionThatTileHas[0])))
-                shuffle = true;
-            else
-                shuffle = false;
-
-            if(shuffle)
-                ShuffleTheTiles();
-        }
-
-        private void ShuffleTheTiles()
-        {
-            for(int i = 0; i < grid.GetLength(0); i++)
-            {
-                for(int j = 0; j < grid.GetLength(1); j++)
-                {
-                    Destroy(grid[i,j]);
-                }
-            }
-            //FillTheBoard();
+            findConnectedTiles.FindAllConnectedTiles();
             //FindSameTiles();
         }
 

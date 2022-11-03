@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tile.TileObject;
 
-namespace Tile.TileIcon
+namespace Board.ChangeTilesIcon
 {
-    public class ChangeTilesIcon : MonoBehaviour
+    public class ChangeConnectedTilesIcon : MonoBehaviour
     {
-        public static void ChangeConnectedTilesIcon(List<GameObject> connectedTiles, int i, int A, int B, int C)
+        public void ChangeAllConnectedTilesIcon(List<GameObject> connectedTiles, int i, int A, int B, int C)
         {
             int numberOfTileInConnectedList = connectedTiles.Count;
 

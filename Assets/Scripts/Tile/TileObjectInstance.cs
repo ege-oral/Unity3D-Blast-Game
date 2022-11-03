@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Tile.TileScriptableObject;
+
 using Tile.TileBlast;
+using Tile.TileScriptableObject;
 using Board;
 
 namespace Tile.TileObject
@@ -11,6 +12,7 @@ namespace Tile.TileObject
     {
         Rigidbody tileRigidBody;
         BoardManager boardManager;
+        TileBlastHandler tileBlastHandler;
         
         // Tile scriptable object reference.
         public TileSO tileSO;
@@ -32,7 +34,7 @@ namespace Tile.TileObject
         {
             tileRigidBody = GetComponent<Rigidbody>();
             boardManager = FindObjectOfType<BoardManager>();
-
+            tileBlastHandler = GetComponent<TileBlastHandler>();
             // The scriptable object content is copied to the current tile.
             CopyScriptableObjectContent();
         }
@@ -48,7 +50,7 @@ namespace Tile.TileObject
             if(blastTheTile)
             {
                 // Destroy, every connection that this tile has.
-                TileBlastHandler.BlastAllConnectedTiles(boardManager, gameObject, nextConnectedTile, previousConnectedTile);
+                tileBlastHandler.BlastAllConnectedTiles(boardManager, gameObject, nextConnectedTile, previousConnectedTile);
             }
         }
 
