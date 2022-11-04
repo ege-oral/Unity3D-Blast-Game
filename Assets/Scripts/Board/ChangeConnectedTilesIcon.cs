@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using Tile.TileObject;
 
 namespace Board.ChangeTilesIcon
 {
     public class ChangeConnectedTilesIcon : MonoBehaviour
     {
-        public void ChangeAllConnectedTilesIcon(List<GameObject> connectedTiles, int i, int A, int B, int C)
+        public void ChangeAllConnectedTilesIcon(List<GameObject> connectedTiles, int currentTileIndex, int A, int B, int C)
         {
             int numberOfTileInConnectedList = connectedTiles.Count;
 
-            TileObjectInstance _currentTile = connectedTiles[i].GetComponent<TileObjectInstance>();
+            TileObjectInstance _currentTile = connectedTiles[currentTileIndex].GetComponent<TileObjectInstance>();
 
-            MeshRenderer currentTileMeshRenderer = connectedTiles[i].GetComponent<MeshRenderer>();
-            MeshRenderer nextTileMeshRenderer = connectedTiles[i + 1].GetComponent<MeshRenderer>();
+            MeshRenderer currentTileMeshRenderer = connectedTiles[currentTileIndex].GetComponent<MeshRenderer>();
+            MeshRenderer nextTileMeshRenderer = connectedTiles[currentTileIndex + 1].GetComponent<MeshRenderer>();
 
             if(numberOfTileInConnectedList <= A)
             {

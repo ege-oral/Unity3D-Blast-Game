@@ -7,7 +7,6 @@ namespace Board.FindAndFillColumns
     public class FindAndFillMissingColumns : MonoBehaviour
     {
         BoardManager boardManager;
-
         private List<int> missingColumns = new List<int>();
         
 
@@ -16,9 +15,9 @@ namespace Board.FindAndFillColumns
         public void FindAndFillAllMissingColumns()
         {
             FindMissingCollumPositions();
+
             // After finding all missing columns, we fill all of them.
             StartCoroutine(FillMissingCollumPositions());
-            
         }
 
         private void FindMissingCollumPositions()
@@ -37,20 +36,22 @@ namespace Board.FindAndFillColumns
 
         private IEnumerator FillMissingCollumPositions()
         {
-            GameObject newTile = null;
+            GameObject newlyCreatedTile = null;
             foreach(int missingColumn in missingColumns)
             {
-                newTile = Instantiate(boardManager.tiles[Random.Range(0, boardManager.NumberOfColors)],
-                                                new Vector3(missingColumn, gameObject.transform.position.y * 2 + 2, 0f),
-                                                Quaternion.Euler(0f,0f,180f));
-                newTile.transform.parent = boardManager.allTileInstances.transform;
+                newlyCreatedTile = Instantiate(boardManager.tiles[Random.Range(0, boardManager.NumberOfColors)],
+                                      new Vector3(missingColumn, gameObject.transform.position.y * 2 + 2, 0f),
+                                      Quaternion.Euler(0f,0f,180f));
+
+                newlyCreatedTile.transform.parent = boardManager.allTileInstances.transform;
                 yield return new WaitForSeconds(0.1f);
             }
+            // After filling the missing columns we clear missingColumns List.
             missingColumns.Clear();
 
             // We keeps track of last created tile.
             // Later we will need this object's value position.
-            boardManager.lastCreatedTile = newTile;
+            boardManager.lastCreatedTile = newlyCreatedTile;
         }
     }
 }

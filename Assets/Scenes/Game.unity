@@ -717,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 361420366}
     - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
       propertyPath: numberOfRows
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9036256395335082381, guid: db65c2d8e4908ac449180a75ec584591, type: 3}
       propertyPath: numberOfColumns

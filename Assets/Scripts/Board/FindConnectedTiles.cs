@@ -35,7 +35,7 @@ namespace Board.FindTiles
                     if(!currentTile.GetComponent<TileObjectInstance>().isVisited)
                     {
                         string tileColor = currentTile.GetComponent<TileObjectInstance>().tileColor.ToString();
-                        ExploreGrid(boardManager.grid, row, col, tileColor, connectedTiles);
+                        ExploreGridBoard(boardManager.grid, row, col, tileColor, connectedTiles);
 
                         for(int i = 0; i < connectedTiles.Count - 1; i++)
                         {
@@ -59,8 +59,7 @@ namespace Board.FindTiles
             boardManager.isTileClicked = false;
         }
 
-        public void ExploreGrid(GameObject[,] grid, int row, int col, 
-                                string tileColor, List<GameObject> connectedTiles)
+        public void ExploreGridBoard(GameObject[,] grid, int row, int col, string tileColor, List<GameObject> connectedTiles)
         {
             // We use DFS algorithm in here.
             // If the row is within the grid area.
@@ -81,10 +80,10 @@ namespace Board.FindTiles
             _tile.isVisited = true;
             connectedTiles.Add(_tile.gameObject);
 
-            ExploreGrid(grid, row + 1, col, tileColor, connectedTiles);
-            ExploreGrid(grid, row - 1, col, tileColor, connectedTiles);
-            ExploreGrid(grid, row, col + 1, tileColor, connectedTiles);
-            ExploreGrid(grid, row, col - 1, tileColor, connectedTiles);
+            ExploreGridBoard(grid, row + 1, col, tileColor, connectedTiles);
+            ExploreGridBoard(grid, row - 1, col, tileColor, connectedTiles);
+            ExploreGridBoard(grid, row, col + 1, tileColor, connectedTiles);
+            ExploreGridBoard(grid, row, col - 1, tileColor, connectedTiles);
         }
     }
 

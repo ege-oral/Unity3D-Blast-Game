@@ -25,13 +25,18 @@ namespace Board.GridBoard
             // Then create another grid.
             foreach(Transform tile in boardManager.allTileInstances.transform)
             {   
-                int tileXPos = Mathf.RoundToInt(tile.gameObject.transform.position.x);
-                int tileYPos = Mathf.RoundToInt(tile.gameObject.transform.position.y);
-                tile.gameObject.GetComponent<TileObjectInstance>().nextConnectedTile = null;
-                tile.gameObject.GetComponent<TileObjectInstance>().previousConnectedTile = null;
-                tile.gameObject.GetComponent<TileObjectInstance>().isVisited = false;
-                tile.gameObject.GetComponent<MeshRenderer>().material = tile.gameObject.GetComponent<TileObjectInstance>().materialDefault;
-                newGrid[tileYPos, tileXPos] = tile.gameObject;
+                TileObjectInstance _currentTile = tile.gameObject.GetComponent<TileObjectInstance>();
+                Vector3 _currentTilesPosition = tile.transform.position;
+
+                int tileXPos = Mathf.RoundToInt(_currentTilesPosition.x);
+                int tileYPos = Mathf.RoundToInt(_currentTilesPosition.y);
+
+                _currentTile.nextConnectedTile = null;
+                _currentTile.previousConnectedTile = null;
+                _currentTile.isVisited = false;
+                
+                tile.gameObject.GetComponent<MeshRenderer>().material = _currentTile.materialDefault;
+                newGrid[tileYPos, tileXPos] = _currentTile.gameObject;
             }
 
             boardManager.grid = (GameObject[,])newGrid.Clone();
