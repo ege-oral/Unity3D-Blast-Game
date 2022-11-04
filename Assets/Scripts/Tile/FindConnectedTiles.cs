@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Tile.TileObject;
+using Board;
 using Board.Shuffle;
-using Board.ChangeTilesIcon;
+using Tile.TileObject;
+using Tile.ChangeTilesIcon;
 
-namespace Board.FindTiles
+namespace Tile.FindConnections
 {    
     public class FindConnectedTiles : MonoBehaviour
     {
@@ -31,10 +31,10 @@ namespace Board.FindTiles
                 for(int col = 0; col < boardManager.grid.GetLength(1); col++)
                 {
                     List<GameObject> connectedTiles = new List<GameObject>();
-                    GameObject currentTile = boardManager.grid[row, col];
-                    if(!currentTile.GetComponent<TileObjectInstance>().isVisited)
+                    TileObjectInstance _currentTile = boardManager.grid[row, col].GetComponent<TileObjectInstance>();
+                    if(!_currentTile.isVisited)
                     {
-                        string tileColor = currentTile.GetComponent<TileObjectInstance>().tileColor.ToString();
+                        string tileColor = _currentTile.tileColor.ToString();
                         ExploreGridBoard(boardManager.grid, row, col, tileColor, connectedTiles);
 
                         for(int i = 0; i < connectedTiles.Count - 1; i++)
@@ -47,27 +47,24 @@ namespace Board.FindTiles
                     tileConnections.Add(connectedTiles.Count);
                 }
             }
-            // Is board need shuffle check.
+            // Is board need shuffle ?
             // If every int value in tileConnections is 1 that means every tile has only one connection.
             // Which is the tile itself so we need to shuffle.
             if(tileConnections.TrueForAll(x => x.Equals(tileConnections[0])))
             {
                 shuffleBoard.ShuffleTheTiles();
             }
-            
-            boardManager.canClickAgain = true;
-            boardManager.isTileClicked = false;
         }
 
         public void ExploreGridBoard(GameObject[,] grid, int row, int col, string tileColor, List<GameObject> connectedTiles)
         {
             // We use DFS algorithm in here.
             // If the row is within the grid area.
-            // If the collum is within the grid area.
+            // If the column is within the grid area.
             // If the tile color matches with the given parameter.
             // If the tile is NOT visited.
             // We sets the isVisited value to true, then adding the gameObject to connectedTiles list.
-            // Finally we recursively call this function again with different grid and collum arguments.
+            // Finally we recursively call this function again with different grid and column arguments.
 
             if(!(row >= 0) || !(row < grid.GetLength(0))) { return; }
             if(!(col >= 0) || !(col < grid.GetLength(1))) { return; }
@@ -86,7 +83,5 @@ namespace Board.FindTiles
             ExploreGridBoard(grid, row, col - 1, tileColor, connectedTiles);
         }
     }
-
-
 }
 

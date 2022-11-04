@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Board.FindTiles;
 using Tile.TileObject;
+using Tile.FindConnections;
 
 namespace Board.GridBoard
 {
@@ -34,14 +33,15 @@ namespace Board.GridBoard
                 _currentTile.nextConnectedTile = null;
                 _currentTile.previousConnectedTile = null;
                 _currentTile.isVisited = false;
-                
+
                 tile.gameObject.GetComponent<MeshRenderer>().material = _currentTile.materialDefault;
                 newGrid[tileYPos, tileXPos] = _currentTile.gameObject;
             }
 
             boardManager.grid = (GameObject[,])newGrid.Clone();
+
+            // After created a new grid board, we find all connected tiles inside this new grid board.
             findConnectedTiles.FindAllConnectedTiles();
         }
-
     }
 }

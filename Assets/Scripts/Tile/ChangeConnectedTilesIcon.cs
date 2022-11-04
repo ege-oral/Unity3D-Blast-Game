@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Tile.TileObject;
 
-namespace Board.ChangeTilesIcon
+namespace Tile.ChangeTilesIcon
 {
     public class ChangeConnectedTilesIcon : MonoBehaviour
     {

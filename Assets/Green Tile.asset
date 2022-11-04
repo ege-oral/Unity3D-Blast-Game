@@ -17,3 +17,7 @@ MonoBehaviour:
   materialA: {fileID: 2100000, guid: cf47fbaee0d8faf4c815b0b7216bbd66, type: 2}
   materialB: {fileID: 2100000, guid: c9de67139e0c6cc47ba5422904265f9f, type: 2}
   materialC: {fileID: 2100000, guid: a6ccc9098fc367d43b5cc14c1841aa8a, type: 2}
+  isVisited: 0
+  blastTheTile: 0
+  nextConnectedTile: {fileID: 0}
+  previousConnectedTile: {fileID: 0}

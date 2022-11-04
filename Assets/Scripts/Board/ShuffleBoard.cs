@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Board;
 using Board.Generate;
-using Board.FindTiles;
+using Tile.FindConnections;
 
 namespace Board.Shuffle
 {
@@ -30,6 +28,8 @@ namespace Board.Shuffle
                     Destroy(boardManager.grid[i,j]);
                 }
             }
+
+            // After destroying all tiles we generate another board and find connected tiles.
             generateBoard.FillTheBoard();
             findConnectedTiles.FindAllConnectedTiles();
         }

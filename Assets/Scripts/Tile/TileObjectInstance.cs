@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Board;
 using Tile.TileBlast;
 using Tile.TileScriptableObject;
-using Board;
 
 namespace Tile.TileObject
 {
@@ -21,10 +20,10 @@ namespace Tile.TileObject
         public Material materialDefault;
         public Material materialA;
         public Material materialB;
-        public Material materialC;
+        private bool blastTheTile;
         
         public bool isVisited;
-        private bool blastTheTile;
+        public Material materialC;
 
         public GameObject nextConnectedTile;      // Next connection to same color tile.
         public GameObject previousConnectedTile;  // Previous connection to same color tile.
@@ -35,6 +34,7 @@ namespace Tile.TileObject
             tileRigidBody = GetComponent<Rigidbody>();
             boardManager = FindObjectOfType<BoardManager>();
             tileBlastHandler = GetComponent<TileBlastHandler>();
+            
             // The scriptable object content is copied to the current tile.
             CopyScriptableObjectContent();
         }
@@ -50,7 +50,7 @@ namespace Tile.TileObject
             if(blastTheTile)
             {
                 // Destroy, every connection that this tile has.
-                tileBlastHandler.BlastAllConnectedTiles(boardManager, gameObject, nextConnectedTile, previousConnectedTile);
+                tileBlastHandler.BlastAllConnectedTiles(boardManager, this.gameObject, nextConnectedTile, previousConnectedTile);
             }
         }
 
@@ -77,6 +77,5 @@ namespace Tile.TileObject
             isVisited = tileSO.isVisited;
             blastTheTile = tileSO.blastTheTile;
         }
-        
     }
 }

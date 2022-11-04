@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Tile.TileObject;
 using Board;
+using Tile.TileObject;
 
 namespace Tile.TileBlast
 {

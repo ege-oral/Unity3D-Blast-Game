@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Board.Generate;
 using Board.BoardSize;
-using Board.FindTiles;
 using Board.GridBoard;
-using Board.FindAndFillColumns;
+using Tile.FindConnections;
+using Tile.FindAndFillTiles;
 
 namespace Board
 {
@@ -29,7 +28,7 @@ namespace Board
         public int B { get { return b; } }
         public int C { get { return c; } }
 
-        public GameObject [,] grid;
+        public GameObject[,] grid;
         public GameObject[] tiles;               // Contains tile prefabs.
         public GameObject allTileInstances;      // The object that holds all the tiles inside.
         public GameObject lastCreatedTile = null;
@@ -42,27 +41,30 @@ namespace Board
         UpdateGridBoard updateGridBoard;
         FindConnectedTiles findConnectedTiles;
         BoardAndCameraSize boardAndCameraSize;
-        FindAndFillMissingColumns findAndFillMissingColumns;
+        FindAndFillMissingTiles findAndFillMissingColumns;
 
         private void Start() 
         {
             grid = new GameObject[numberOfRows, numberOfColumns];
 
+            generateBoard = GetComponent<GenerateBoard>();    
             updateGridBoard = GetComponent<UpdateGridBoard>();
-            findAndFillMissingColumns = GetComponent<FindAndFillMissingColumns>();
+            boardAndCameraSize = GetComponent<BoardAndCameraSize>();
+            findConnectedTiles = GetComponent<FindConnectedTiles>();
+            findAndFillMissingColumns = GetComponent<FindAndFillMissingTiles>();
 
             // We adjust camera position for dynamic sizing grid.
-            boardAndCameraSize = GetComponent<BoardAndCameraSize>();
             boardAndCameraSize.BoardAndCameraStartSize();
-
-            generateBoard = GetComponent<GenerateBoard>();    
             generateBoard.FillTheBoard();
-            
-            findConnectedTiles = GetComponent<FindConnectedTiles>();
             findConnectedTiles.FindAllConnectedTiles();
         }
 
         private void Update() 
+        {
+            GameProcess();
+        }
+
+        private void GameProcess()
         {
             if(isTileClicked && canClickAgain)
             {
@@ -75,6 +77,8 @@ namespace Board
             {
                 updateGridBoard.CreateNewGridBoard();
                 lastCreatedTile = null;
+                canClickAgain = true;
+                isTileClicked = false;
             }
         }
     }

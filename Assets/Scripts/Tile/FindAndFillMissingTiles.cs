@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Board;
 
-namespace Board.FindAndFillColumns
+namespace Tile.FindAndFillTiles
 {
-    public class FindAndFillMissingColumns : MonoBehaviour
+    public class FindAndFillMissingTiles : MonoBehaviour
     {
         BoardManager boardManager;
         private List<int> missingColumns = new List<int>();
@@ -14,13 +15,13 @@ namespace Board.FindAndFillColumns
 
         public void FindAndFillAllMissingColumns()
         {
-            FindMissingCollumPositions();
+            FindMissingTilesColumnPositions();
 
             // After finding all missing columns, we fill all of them.
-            StartCoroutine(FillMissingCollumPositions());
+            StartCoroutine(FillMissingTileColumnPositions());
         }
 
-        private void FindMissingCollumPositions()
+        private void FindMissingTilesColumnPositions()
         {
             for (int i = 0; i < boardManager.grid.GetLength(0); i++)
             {
@@ -34,7 +35,7 @@ namespace Board.FindAndFillColumns
             }
         }
 
-        private IEnumerator FillMissingCollumPositions()
+        private IEnumerator FillMissingTileColumnPositions()
         {
             GameObject newlyCreatedTile = null;
             foreach(int missingColumn in missingColumns)

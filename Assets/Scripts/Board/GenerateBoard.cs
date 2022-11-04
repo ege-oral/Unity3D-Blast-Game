@@ -14,12 +14,12 @@ namespace Board.Generate
         {   
             for(int row = 0; row < boardManager.NumberOfRows; row++)
             {
-                for(int collum = 0; collum < boardManager.NumberOfColumns; collum++)
+                for(int column = 0; column < boardManager.NumberOfColumns; column++)
                 {
                     GameObject tile = Instantiate(boardManager.tiles[Random.Range(0, boardManager.NumberOfColors)], 
-                                                  new Vector3(collum, row, 0f), 
+                                                  new Vector3(column, row, 0f), 
                                                   Quaternion.Euler(0f,0f,180f));
-                    boardManager.grid[row, collum] = tile;
+                    boardManager.grid[row, column] = tile;
                     tile.transform.parent = boardManager.allTileInstances.transform;
                 }
             }

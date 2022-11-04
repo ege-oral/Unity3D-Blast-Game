@@ -23,11 +23,10 @@ namespace Tile.TileScriptableObject
         public Material materialB;
         public Material materialC;
 
-        internal bool isVisited = false;
-        internal bool blastTheTile = false;
+        [HideInInspector] public bool isVisited = false;
+        [HideInInspector] public bool blastTheTile = false;
         
-        internal GameObject nextConnectedTile = null;      // Next connection to same color tile.
-        internal GameObject previousConnectedTile = null;  // Previous connection to same color tile.
-        
+        [HideInInspector] public GameObject nextConnectedTile = null;      // Next connection to same color tile.
+        [HideInInspector] public GameObject previousConnectedTile = null;  // Previous connection to same color tile.
     }
 }
