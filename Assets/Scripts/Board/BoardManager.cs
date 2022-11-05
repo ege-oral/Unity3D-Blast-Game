@@ -28,14 +28,14 @@ namespace Board
         public int B { get { return b; } }
         public int C { get { return c; } }
 
-        public GameObject[,] grid;
+        [HideInInspector] public GameObject[,] grid;
+        [HideInInspector] public GameObject lastCreatedTile = null;
         public GameObject[] tiles;               // Contains tile prefabs.
         public GameObject allTileInstances;      // The object that holds all the tiles inside.
-        public GameObject lastCreatedTile = null;
         
-        public bool canClickAgain = true;
-        public bool isTileClicked = false;
-        public bool shuffle = false;
+        [HideInInspector] public bool canClickAgain = true;
+        [HideInInspector] public bool isTileClicked = false;
+        [HideInInspector] public bool shuffle = false;
         
         GenerateBoard generateBoard;
         UpdateGridBoard updateGridBoard;

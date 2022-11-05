@@ -29,7 +29,7 @@ namespace Board.Shuffle
                 }
             }
 
-            // After destroying all tiles we generate another board and find connected tiles.
+            // After shuffling all tiles we generate another board and find connected tiles.
             generateBoard.FillTheBoard();
             findConnectedTiles.FindAllConnectedTiles();
         }
